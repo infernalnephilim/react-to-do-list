@@ -1,0 +1,146 @@
+$list-margin-size: 10px;
+$list-outline-size: $list-margin-size;
+
+$font-color: #707070;
+$border-color: #DDDDDD;
+$table-header-color: #494430;
+
+$delete-icon-hover-color: #c20000;
+
+$task-col-width: 70%;
+$remove-col-width: 5%;
+$priority-col-width: (100% - $task-col-width - $remove-col-width)/2;
+$done-col-width: $priority-col-width;
+
+$col-padding: 15px 20px;
+
+@mixin transition-ease($time) {
+  -webkit-transition: all ease $time;
+  -moz-transition: all ease $time;
+  -ms-transition: all ease $time;
+  -o-transition: all ease $time;
+  transition: all ease $time;
+}
+
+select {
+  border: 1px solid $border-color;
+  padding: 5px 10px;
+}
+
+.ToDoListApp {
+  background: #eee;
+  width: 100%;
+  height: 100vh;
+  &__to-do, &__form {
+    margin: $list-margin-size;
+    outline: $list-outline-size solid #eee;
+    border: 1px solid $border-color;
+  }
+  &__header {
+    padding: $col-padding;
+    background: #eee;
+  }
+  .form {
+    $padding: 10px 20px;
+    display: flex;
+    justify-content: stretch;
+    input {
+      flex: 10;
+      padding: $padding;
+      border: 1px solid $border-color;
+    }
+    select {
+      flex: 2;
+      padding: 10px 5px;
+    }
+    button {
+      flex: 2;
+      padding: $padding;
+      border: 1px solid $border-color;
+      background: #fff;
+      @include transition-ease(.5s);
+      &:hover {
+        cursor: pointer;
+        background: $border-color;
+      }
+    }
+  }
+
+  .to-do {
+    &__row {
+      width: 100%;
+      display: flex;
+      background: #fff;
+      align-items: baseline;
+      &--header {
+        background: $table-header-color;
+        color: #fff;
+        .to-do__col {
+          &:hover {
+            cursor: pointer;
+          }
+          &--remove {
+            &:hover {
+              cursor: default;
+            }
+          }
+        }
+      }
+      &--list {
+        flex-direction: column;
+        .task {
+          width: 100%;
+          display: flex;
+          border-bottom: 1px solid $border-color;
+          i {
+            opacity: 0;
+            @include transition-ease(.5s);
+          }
+          &:hover {
+            i {
+              opacity: 1;
+              cursor: pointer;
+              &:hover {
+                color: $delete-icon-hover-color;
+              }
+            }
+          }
+        }
+      }
+      &--footer {
+        justify-content: flex-end;
+      }
+    }
+    &__col {
+      padding: $col-padding;
+      &--name {
+        flex: 10;
+        width: $task-col-width;
+      }
+      &--priority {
+        flex: 2;
+        width: $priority-col-width;
+        text-align: center;
+      }
+      &--done {
+        flex: 2;
+        width: $done-col-width;
+        text-align: center;
+      }
+      &--remove {
+        flex: 1;
+        max-width: 50px;
+        width: $remove-col-width;
+        text-align: center;
+      }
+    }
+
+  }
+  .controls {
+    &__arrow {
+      padding: 0px 10px;
+      color: $font-color;
+      font-size: 1.2rem;
+    }
+  }
+}

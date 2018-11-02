@@ -1,32 +1,94 @@
-.App {
-  text-align: center;
-}
+select {
+  border: 1px solid #DDDDDD;
+  padding: 5px 10px; }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
+.ToDoListApp {
+  background: #eee;
+  width: 100%;
+  height: 100vh; }
+  .ToDoListApp__to-do, .ToDoListApp__form {
+    margin: 10px;
+    outline: 10px solid #eee;
+    border: 1px solid #DDDDDD; }
+  .ToDoListApp__header {
+    padding: 15px 20px;
+    background: #eee; }
+  .ToDoListApp .form {
+    display: flex;
+    justify-content: stretch; }
+    .ToDoListApp .form input {
+      flex: 10;
+      padding: 10px 20px;
+      border: 1px solid #DDDDDD; }
+    .ToDoListApp .form select {
+      flex: 2;
+      padding: 10px 5px; }
+    .ToDoListApp .form button {
+      flex: 2;
+      padding: 10px 20px;
+      border: 1px solid #DDDDDD;
+      background: #fff;
+      -webkit-transition: all ease 0.5s;
+      -moz-transition: all ease 0.5s;
+      -ms-transition: all ease 0.5s;
+      -o-transition: all ease 0.5s;
+      transition: all ease 0.5s; }
+      .ToDoListApp .form button:hover {
+        cursor: pointer;
+        background: #DDDDDD; }
+  .ToDoListApp .to-do__row {
+    width: 100%;
+    display: flex;
+    background: #fff;
+    align-items: baseline; }
+    .ToDoListApp .to-do__row--header {
+      background: #494430;
+      color: #fff; }
+      .ToDoListApp .to-do__row--header .to-do__col:hover {
+        cursor: pointer; }
+      .ToDoListApp .to-do__row--header .to-do__col--remove:hover {
+        cursor: default; }
+    .ToDoListApp .to-do__row--list {
+      flex-direction: column; }
+      .ToDoListApp .to-do__row--list .task {
+        width: 100%;
+        display: flex;
+        border-bottom: 1px solid #DDDDDD; }
+        .ToDoListApp .to-do__row--list .task i {
+          opacity: 0;
+          -webkit-transition: all ease 0.5s;
+          -moz-transition: all ease 0.5s;
+          -ms-transition: all ease 0.5s;
+          -o-transition: all ease 0.5s;
+          transition: all ease 0.5s; }
+        .ToDoListApp .to-do__row--list .task:hover i {
+          opacity: 1;
+          cursor: pointer; }
+          .ToDoListApp .to-do__row--list .task:hover i:hover {
+            color: #c20000; }
+    .ToDoListApp .to-do__row--footer {
+      justify-content: flex-end; }
+  .ToDoListApp .to-do__col {
+    padding: 15px 20px; }
+    .ToDoListApp .to-do__col--name {
+      flex: 10;
+      width: 70%; }
+    .ToDoListApp .to-do__col--priority {
+      flex: 2;
+      width: 12.5%;
+      text-align: center; }
+    .ToDoListApp .to-do__col--done {
+      flex: 2;
+      width: 12.5%;
+      text-align: center; }
+    .ToDoListApp .to-do__col--remove {
+      flex: 1;
+      max-width: 50px;
+      width: 5%;
+      text-align: center; }
+  .ToDoListApp .controls__arrow {
+    padding: 0px 10px;
+    color: #707070;
+    font-size: 1.2rem; }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/*# sourceMappingURL=App.css.map */
