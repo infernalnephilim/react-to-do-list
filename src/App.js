@@ -23,11 +23,11 @@ class App extends Component {
 
     saveData() {
         const tasks = this.state.tasks;
-        localStorage.setItem("taskData14", JSON.stringify(tasks));
+        localStorage.setItem("taskData_AleksandraPoltorak_ToDoApp", JSON.stringify(tasks));
     };
 
     getData() {
-        const cachedData = localStorage.getItem("taskData14");
+        const cachedData = localStorage.getItem("taskData_AleksandraPoltorak_ToDoApp");
         if (cachedData) {
             const parsedData = JSON.parse(cachedData);
             this.state = {
