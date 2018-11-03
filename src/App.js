@@ -23,11 +23,11 @@ class App extends Component {
 
     saveData() {
         const tasks = this.state.tasks;
-        localStorage.setItem("taskData13", JSON.stringify(tasks));
+        localStorage.setItem("taskData14", JSON.stringify(tasks));
     };
 
     getData() {
-        const cachedData = localStorage.getItem("taskData13");
+        const cachedData = localStorage.getItem("taskData14");
         if (cachedData) {
             const parsedData = JSON.parse(cachedData);
             this.state = {
@@ -54,7 +54,7 @@ class App extends Component {
         e.preventDefault();
         const task = e.target.elements.name.value;
         const priority = e.target.elements.priority.value;
-        if (task && priority) {
+        if (task && priority !== "None") {
             const data = this.state.tasks;
             data.unshift({
                 "id": data.length + 1, "name": task, "priority": priority, "done": false
@@ -65,8 +65,21 @@ class App extends Component {
                 tasksLength: dataLength
             });
             this.saveData();
+            document.getElementsByClassName("form__info--name")[0].style.display = "none";
+            document.getElementsByClassName("form__info--priority")[0].style.display = "none";
+            e.target.reset();
 
         } else {
+            if(task === ""){
+                document.getElementsByClassName("form__info--name")[0].style.display = "block";
+            } else{
+                document.getElementsByClassName("form__info--name")[0].style.display = "none";
+            }
+            if(priority === "None"){
+                document.getElementsByClassName("form__info--priority")[0].style.display = "block";
+            } else{
+                document.getElementsByClassName("form__info--priority")[0].style.display = "none";
+            }
             console.log("Nie uzupełniono wszystkich pól");
         }
     };
@@ -86,7 +99,6 @@ class App extends Component {
     };
 
     rowsPerPage = (rows) => {
-        console.log(rows.target.value);
         this.setState({
             defaultRowNr: rows.target.value
         });
@@ -97,25 +109,35 @@ class App extends Component {
         console.log(type);
         switch (col) {
             case "name":
-
-                break;
-            case "priority":
-                const priorities = {
-                    low: 0,
-                    medium: 1,
-                    high: 2
-                };
                 if (type === "asc") {
                     const data = this.state.tasks;
-                    data.sort((a, b) => priorities[a.priority] - priorities[b.priority]);
-                    console.log(data);
+                    data.sort((a, b) => {
+                        return a.name.localeCompare(b.name)
+                    });
                     this.setState({
                         tasks: data
                     });
                 } else if (type === "desc") {
                     const data = this.state.tasks;
-                    data.sort((a, b) => a.done - b.done).reverse();
-                    console.log(data);
+                    data.sort((a, b) => {
+                        return a.name.localeCompare(b.name)
+                    }).reverse();
+                    this.setState({
+                        tasks: data
+                    });
+                }
+                break;
+            case "priority":
+                const priorities = ["Low", "Medium", "High"];
+                if (type === "asc") {
+                    const data = this.state.tasks;
+                    data.sort((a, b) => priorities.indexOf(a.priority) - priorities.indexOf(b.priority));
+                    this.setState({
+                        tasks: data
+                    });
+                } else if (type === "desc") {
+                    const data = this.state.tasks;
+                    data.sort((a, b) => priorities.indexOf(a.priority) - priorities.indexOf(b.priority)).reverse();
                     this.setState({
                         tasks: data
                     });
@@ -125,14 +147,12 @@ class App extends Component {
                 if (type === "asc") {
                     const data = this.state.tasks;
                     data.sort((a, b) => a.done - b.done);
-                    console.log(data);
                     this.setState({
                         tasks: data
                     });
                 } else if (type === "desc") {
                     const data = this.state.tasks;
                     data.sort((a, b) => a.done - b.done).reverse();
-                    console.log(data);
                     this.setState({
                         tasks: data
                     });

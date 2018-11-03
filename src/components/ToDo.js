@@ -10,7 +10,6 @@ class ToDo extends Component {
     };
 
     previousSite() {
-        console.log("PREV");
         const pagesNr = Math.ceil(this.props.tasksLength / this.props.rows);
 
         this.setState({
@@ -27,7 +26,6 @@ class ToDo extends Component {
     }
 
     nextSite() {
-        console.log("NEXT");
         const pagesNr = Math.ceil(this.props.tasksLength / this.props.rows);
         this.setState({
             pagesNr: pagesNr
@@ -41,7 +39,8 @@ class ToDo extends Component {
             currentPage: currentPage
         });
     }
-    rowsPerPage(e){
+
+    rowsPerPage(e) {
         this.setState({
             currentPage: 1,
             rows: e.value
@@ -49,22 +48,43 @@ class ToDo extends Component {
         this.props.rowsPerPage(e);
     }
 
-    sort(e){
+    sort(e) {
+        let sortArrowsUp = document.getElementsByClassName("fa-sort-up");
+        [].forEach.call(sortArrowsUp, (e) => {
+            e.style.opacity = "0"
+        });
+        if (e.target.dataset.order === "") {
+            e.target.dataset.order = "asc";
+        }
         this.props.sort(e.target.dataset.col, e.target.dataset.order);
+        e.target.getElementsByClassName("fa-sort-up")[0].style.opacity = "1";
+        if (e.target.dataset.order === "asc") {
+            e.target.dataset.order = "desc";
+            e.target.getElementsByClassName("fa-sort-up")[0].style.transform = "rotate(0deg)";
+
+        } else {
+            e.target.dataset.order = "asc";
+            e.target.getElementsByClassName("fa-sort-up")[0].style.transform = "rotate(180deg)";
+
+        }
+
     }
 
     render() {
         return (
             <div className="ToDoListApp__to-do to-do">
                 <div className="to-do__row to-do__row--header">
-                    <div className="to-do__col to-do__col--name" data-col="name" data-order="asc" onClick={this.sort.bind(this)}>
-                        Task name
+                    <div className="to-do__col to-do__col--name" data-col="name" data-order=""
+                         onClick={this.sort.bind(this)}>
+                        Task name <i className="fas fa-sort-up"></i>
                     </div>
-                    <div className="to-do__col to-do__col--priority" data-col="priority" data-order="asc" onClick={this.sort.bind(this)}>
-                        Priority
+                    <div className="to-do__col to-do__col--priority" data-col="priority" data-order=""
+                         onClick={this.sort.bind(this)}>
+                        Priority <i className="fas fa-sort-up"></i>
                     </div>
-                    <div className="to-do__col to-do__col--done" data-col="done" data-order="desc" onClick={this.sort.bind(this)}>
-                        Done
+                    <div className="to-do__col to-do__col--done" data-col="done" data-order=""
+                         onClick={this.sort.bind(this)}>
+                        Done <i className="fas fa-sort-up"></i>
                     </div>
                     <div className="to-do__col to-do__col--remove">
 
@@ -73,7 +93,7 @@ class ToDo extends Component {
                 <div className="to-do__row to-do__row--list">
                     {
                         this.props.tasks.map((e, i) => {
-                                if (i >= (this.state.currentPage - 1) * this.props.rows + 1
+                                if (i >= (this.state.currentPage - 1) * this.props.rows
                                     && (i <= this.state.currentPage * this.props.rows))
                                     return <Task
                                         key={i}
@@ -103,7 +123,8 @@ class ToDo extends Component {
                     <div className="to-do__col">
                         <div className="to-do-footer__pagination">
                             <div className="pages">
-                                {(this.state.currentPage - 1) * this.props.rows + 1}
+                                {((this.state.currentPage - 1) * this.props.rows + 1 > this.props.tasksLength)
+                                    ? 0 : (this.state.currentPage - 1) * this.props.rows + 1 }
                                 &nbsp;
                                 -
                                 &nbsp;

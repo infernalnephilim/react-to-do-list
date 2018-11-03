@@ -22,6 +22,14 @@ $col-padding: 15px 20px;
   transition: all ease $time;
 }
 
+@mixin transformX($x) {
+  -webkit-transform: translateX($x);
+  -moz-transform: translateX($x);
+  -ms-transform: translateX($x);
+  -o-transform: translateX($x);
+  transform: translateX($x);
+}
+
 select {
   border: 1px solid $border-color;
   padding: 5px 10px;
@@ -31,27 +39,33 @@ select {
   background: #eee;
   width: 100%;
   height: 100vh;
-  &__to-do, &__form {
+  &__to-do {
     margin: $list-margin-size;
     outline: $list-outline-size solid #eee;
     border: 1px solid $border-color;
+  }
+  &__form {
+    margin: $list-margin-size;
   }
   &__header {
     padding: $col-padding;
     background: #eee;
   }
   .form {
+    border: 1px solid $border-color;
     $padding: 10px 20px;
     display: flex;
     justify-content: stretch;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
     input {
-      flex: 10;
+      width: 100%;
       padding: $padding;
       border: 1px solid $border-color;
     }
     select {
-      flex: 2;
-      padding: 10px 5px;
+      width: 100%;
+      padding: 9px 5px;
     }
     button {
       flex: 2;
@@ -64,6 +78,39 @@ select {
         background: $border-color;
       }
     }
+    &__input {
+      flex: 2;
+      position: relative;
+      height: 30px;
+      color: #fff;
+      font-size: .8rem;
+      &--name {
+        flex: 10;
+      }
+    }
+    &__info {
+      position: absolute;
+      display: none;
+      background: white;
+      padding: 10px;
+      background: $delete-icon-hover-color;
+      -webkit-animation: fadeIn .5s;
+      -o-animation: fadeIn .5s;
+      animation: fadeIn .5s;
+      z-index: 10;
+      &::before {
+        $size: 10px;
+        content: '';
+        width: 0;
+        height: 0;
+        border-bottom: $size solid $delete-icon-hover-color;
+        border-left: $size solid transparent;
+        border-right: $size solid transparent;
+        position: absolute;
+        top: -$size
+      }
+    }
+
   }
 
   .to-do {
@@ -76,6 +123,7 @@ select {
         background: $table-header-color;
         color: #fff;
         .to-do__col {
+          position: relative;
           &:hover {
             cursor: pointer;
           }
@@ -84,6 +132,13 @@ select {
               cursor: default;
             }
           }
+          .fa-sort-down, .fa-sort-up {
+            opacity: 0;
+            position: absolute;
+            left: 5px;
+            top: 35%;
+            @include transition-ease(.5s);
+          }
         }
       }
       &--list {
@@ -91,6 +146,7 @@ select {
         .task {
           width: 100%;
           display: flex;
+          flex-wrap: wrap;
           border-bottom: 1px solid $border-color;
           i {
             opacity: 0;
@@ -120,12 +176,10 @@ select {
       &--priority {
         flex: 2;
         width: $priority-col-width;
-        text-align: center;
       }
       &--done {
         flex: 2;
         width: $done-col-width;
-        text-align: center;
       }
       &--remove {
         flex: 1;
@@ -136,11 +190,47 @@ select {
     }
 
   }
+  .to-do-footer__choose-rows {
+    label {
+      margin-right: 5px;
+    }
+  }
   .controls {
     &__arrow {
       padding: 0px 10px;
       color: $font-color;
       font-size: 1.2rem;
+      i {
+        @include transition-ease(.5s);
+      }
+      &:hover {
+        cursor: pointer;
+      }
+      &--left {
+        &:hover {
+          i {
+            @include transformX(-2px);
+          }
+        }
+      }
+      &--right {
+        &:hover {
+          i {
+            @include transformX(2px);
+          }
+        }
+      }
     }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
