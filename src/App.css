@@ -156,6 +156,44 @@ select {
       -o-transform: translateX(2px);
       transform: translateX(2px); }
 
+.custom-checkbox {
+  position: relative; }
+  .custom-checkbox:hover {
+    cursor: pointer; }
+    .custom-checkbox:hover input ~ .custom-checkbox__checkmark {
+      background-color: #eee; }
+  .custom-checkbox input:checked ~ .custom-checkbox__checkmark {
+    background: #F69F3A;
+    border-color: #F69F3A; }
+  .custom-checkbox input:checked ~ .custom-checkbox__checkmark:after {
+    display: block; }
+  .custom-checkbox input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0; }
+  .custom-checkbox__checkmark {
+    position: absolute;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #eee;
+    border-radius: 2px; }
+    .custom-checkbox__checkmark::after {
+      content: "";
+      position: absolute;
+      display: none;
+      left: 5px;
+      top: 1px;
+      width: 5px;
+      height: 10px;
+      border: solid #fff;
+      border-width: 0 3px 3px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg); }
+
 @keyframes fadeIn {
   0% {
     opacity: 0;

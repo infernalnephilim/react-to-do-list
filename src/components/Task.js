@@ -18,10 +18,13 @@ class Task extends Component {
                     {this.props.priority}
                 </div>
                 <div className="to-do__col to-do__col--done">
+                    <label className="custom-checkbox">
                     <input type="checkbox" checked={this.props.done} onChange={this.markDone.bind(this)}/>
+                    <span className="custom-checkbox__checkmark"> </span>
+                    </label>
                 </div>
                 <div className="to-do__col to-do__col--remove">
-                    <i className="far fa-trash-alt" onClick={this.removeItem.bind(this)}></i>
+                    <i className="far fa-trash-alt" onClick={this.removeItem.bind(this)}> </i>
                 </div>
             </div>
         );

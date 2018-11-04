@@ -4,6 +4,7 @@ $list-outline-size: $list-margin-size;
 $font-color: #707070;
 $border-color: #DDDDDD;
 $table-header-color: #494430;
+$decoration-color: #F69F3A;
 
 $delete-icon-hover-color: #c20000;
 
@@ -222,6 +223,54 @@ select {
       }
     }
   }
+}
+
+.custom-checkbox {
+  $size: 20px;
+  position: relative;
+  &:hover {
+    cursor: pointer;
+    input ~ .custom-checkbox__checkmark {
+      background-color: #eee;
+    }
+  }
+  input:checked ~ .custom-checkbox__checkmark {
+    background: $decoration-color;
+    border-color: $decoration-color;
+  }
+  input:checked ~ .custom-checkbox__checkmark:after {
+    display: block;
+  }
+  input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  &__checkmark {
+    position: absolute;
+    left: 0;
+    width: $size;
+    height: $size;
+    border: 1px solid #eee;
+    border-radius: 2px;
+    &::after {
+      content: "";
+      position: absolute;
+      display: none;
+      left: 5px;
+      top: 1px;
+      width: 5px;
+      height: 10px;
+      border: solid #fff;
+      border-width: 0 3px 3px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+  }
+
 }
 
 @keyframes fadeIn {
