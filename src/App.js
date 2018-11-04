@@ -23,11 +23,11 @@ class App extends Component {
 
     saveData() {
         const tasks = this.state.tasks;
-        localStorage.setItem("taskData_AleksandraPoltorak_ToDoApp", JSON.stringify(tasks));
+        localStorage.setItem("taskData_AleksandraPoltorak_ToDoApp2", JSON.stringify(tasks));
     };
 
     getData() {
-        const cachedData = localStorage.getItem("taskData_AleksandraPoltorak_ToDoApp");
+        const cachedData = localStorage.getItem("taskData_AleksandraPoltorak_ToDoApp2");
         if (cachedData) {
             const parsedData = JSON.parse(cachedData);
             this.state = {
@@ -46,9 +46,10 @@ class App extends Component {
         this.setState({
             tasks: data,
             tasksLength: dataLength
+        }, ()=>{
+            this.saveData();
         });
 
-        this.saveData();
     };
     addTask = (e) => {
         e.preventDefault();
@@ -63,8 +64,10 @@ class App extends Component {
             this.setState({
                 tasks: data,
                 tasksLength: dataLength
+            }, ()=> {
+                this.saveData();
             });
-            this.saveData();
+
             document.getElementsByClassName("form__info--name")[0].style.display = "none";
             document.getElementsByClassName("form__info--priority")[0].style.display = "none";
             e.target.reset();
@@ -94,8 +97,9 @@ class App extends Component {
         this.setState({
             tasks: data,
             tasksLength: dataLength
+        }, ()=>{
+            this.saveData();
         });
-        this.saveData();
     };
 
     rowsPerPage = (rows) => {

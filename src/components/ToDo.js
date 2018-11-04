@@ -10,7 +10,8 @@ class ToDo extends Component {
     };
 
     previousSite() {
-        const pagesNr = Math.ceil(this.props.tasksLength / this.props.rows);
+        let pagesNr = Math.ceil(this.props.tasksLength / this.props.rows);
+        if (pagesNr === 0) pagesNr = 1;
 
         this.setState({
             pagesNr: pagesNr
@@ -26,7 +27,9 @@ class ToDo extends Component {
     }
 
     nextSite() {
-        const pagesNr = Math.ceil(this.props.tasksLength / this.props.rows);
+        let pagesNr = Math.ceil(this.props.tasksLength / this.props.rows);
+        if (pagesNr === 0) pagesNr = 1;
+
         this.setState({
             pagesNr: pagesNr
         });
@@ -92,6 +95,15 @@ class ToDo extends Component {
                 </div>
                 <div className="to-do__row to-do__row--list">
                     {
+                        this.props.tasksLength < 1 ?
+                            <div className="to-do__row">
+                                <div className="to-do__col">
+                                    <p>There is nothing to do yet!</p>
+                                </div>
+                            </div>
+                            : ""
+                    }
+                    {
                         this.props.tasks.map((e, i) => {
                                 if (i >= (this.state.currentPage - 1) * this.props.rows
                                     && (i <= this.state.currentPage * this.props.rows))
@@ -124,14 +136,14 @@ class ToDo extends Component {
                         <div className="to-do-footer__pagination">
                             <div className="pages">
                                 {((this.state.currentPage - 1) * this.props.rows + 1 > this.props.tasksLength)
-                                    ? 0 : (this.state.currentPage - 1) * this.props.rows + 1 }
+                                    ? 0 : (this.state.currentPage - 1) * this.props.rows + 1}
                                 &nbsp;
                                 -
                                 &nbsp;
                                 {
                                     ((this.state.currentPage * this.props.rows) > this.props.tasksLength)
                                         ? this.props.tasksLength : (this.state.currentPage * this.props.rows)
-                                } of {this.props.tasksLength}</div>
+                                } of&nbsp;{this.props.tasksLength}</div>
                         </div>
                     </div>
                     <div className="to-do__col controls">
