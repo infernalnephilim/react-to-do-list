@@ -56,15 +56,18 @@ select {
     border: 1px solid $border-color;
     $padding: 10px 20px;
     display: flex;
-    justify-content: stretch;
+    justify-content: center;
+    align-items: stretch;
     flex-wrap: wrap;
     margin-bottom: 50px;
     input {
+      min-width: 300px;
       width: 100%;
       padding: $padding;
       border: 1px solid $border-color;
     }
     select {
+      min-width: 100px;
       width: 100%;
       padding: 9px 5px;
     }
@@ -82,7 +85,6 @@ select {
     &__input {
       flex: 2;
       position: relative;
-      height: 30px;
       color: #fff;
       font-size: .8rem;
       &--name {

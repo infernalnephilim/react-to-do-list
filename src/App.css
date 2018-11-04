@@ -18,14 +18,17 @@ select {
   .ToDoListApp .form {
     border: 1px solid #DDDDDD;
     display: flex;
-    justify-content: stretch;
+    justify-content: center;
+    align-items: stretch;
     flex-wrap: wrap;
     margin-bottom: 50px; }
     .ToDoListApp .form input {
+      min-width: 300px;
       width: 100%;
       padding: 10px 20px;
       border: 1px solid #DDDDDD; }
     .ToDoListApp .form select {
+      min-width: 100px;
       width: 100%;
       padding: 9px 5px; }
     .ToDoListApp .form button {
@@ -44,7 +47,6 @@ select {
     .ToDoListApp .form__input {
       flex: 2;
       position: relative;
-      height: 30px;
       color: #fff;
       font-size: .8rem; }
       .ToDoListApp .form__input--name {
